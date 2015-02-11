@@ -10,7 +10,7 @@ import org.junit.Test;
 /**
  * JUnit Testcase to test Rational. 
  * Note that this class uses 'annotations' (the @...). This is a Java 1.5 feature. 
- * @author Niek
+ * @author Niek and Tanja
  *
  */
 public class TestRational {
