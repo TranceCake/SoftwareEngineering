@@ -154,7 +154,7 @@ public class Rational {
      */
 	public Rational div(Rational other) throws Exception {
         try{
-            if(other.numerator == 0 || other.denominator == 0) throw new Exception("Can't devide by 0.");
+            if(other.numerator == 0 || this.numerator == 0) throw new Exception("Can't devide by 0.");
             return new Rational(
                     numerator * other.denominator,
                     denominator * other.numerator

@@ -20,8 +20,10 @@ public class TestRational {
 	public void setUp(){
 		r = new Rational();
 	}
-	
+
+
 	@Test
+    @SuppressWarnings("deprication")
 	public void testSimplify() {
 		r.setNumerator(25);
 		r.setDenominator(5);
