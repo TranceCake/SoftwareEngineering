@@ -20,7 +20,7 @@ package multiformat;
 
 /**
  * Class representing a rational ('breuk').
- * @author J.Baljé: Added comments
+ * @author J.Baljï¿½: Added comments
  */
 public class Rational {
 	static final double PRECISION=10;
@@ -127,10 +127,17 @@ public class Rational {
 			denominator * other.denominator);
 	}
 
-	public Rational div(Rational other) {
-		return new Rational(
-			numerator * other.denominator,
-			denominator * other.numerator);
+	public Rational div(Rational other) throws Exception {
+        try{
+            if(other.numerator == 0 || other.denominator == 0) throw new Exception("Can't devide by 0.");
+            return new Rational(
+                    numerator * other.denominator,
+                    denominator * other.numerator
+            );
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return new Rational();
+        }
 	}
 
 	public void copyOf(Rational other) {
