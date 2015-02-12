@@ -24,7 +24,7 @@ import java.io.*;
  * De main-klasse die leest en schrijft naar de console.
  * 
  * @author Brugali
- * @author Baljé
+ * @author Baljï¿½
  */
 public class Command {
   Calculator calc=new Calculator();
@@ -85,8 +85,10 @@ public class Command {
     }
     catch(IOException ioe) {
       ioe.printStackTrace();
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-    return true;
+      return true;
   }
 
   void printHelp() {

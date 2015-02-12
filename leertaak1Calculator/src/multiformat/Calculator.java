@@ -47,7 +47,7 @@ public class Calculator {
     operand_0 = operand_1.mul(operand_0);
     operand_1 = new Rational();
   }
-  public void divide() {
+  public void divide() throws Exception {
     operand_0 = operand_1.div(operand_0);
     operand_1 = new Rational();
   }
