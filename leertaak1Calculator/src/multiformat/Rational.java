@@ -21,6 +21,8 @@ package multiformat;
 /**
  * Class representing a rational ('breuk').
  * @author J.Balj�: Added comments
+ * @author Niek Gigengack <n.gigengack@st.hanze.nl>
+ * @author Tanja Galama <t.a.t.galama@st.hanze.nl>
  */
 public class Rational {
 	static final double PRECISION=10;
@@ -40,9 +42,16 @@ public class Rational {
 		simplify();
 	}
 
+    /**
+     * Create a new Rational
+     */
 	public Rational() {
 	}
 
+    /**
+     * Create a new Rational
+     * @param number Numerator
+     */
 	public Rational(double number) {
 		numerator = number;
 		denominator = 1.0;
@@ -112,6 +121,11 @@ public class Rational {
 								,denominator * other.denominator);
 	}
 
+    /**
+     * Subtract two rationals
+     * @param other Another Rational to subtract this with.
+     * @return A new Rational representing the subtraction.
+     */
 	public Rational minus(Rational other) {
 		if (denominator == other.denominator)
 			return new Rational(numerator - other.numerator, denominator);
@@ -121,12 +135,23 @@ public class Rational {
 								,denominator * other.denominator);
 	}
 
+    /**
+     * Multiply two rationals
+     * @param other Another Rational to add to multiply this with.
+     * @return A new Rational representing the multiplication.
+     */
 	public Rational mul(Rational other) {
 		return new Rational(
 			numerator * other.numerator,
 			denominator * other.denominator);
 	}
 
+    /**
+     * Divide two rationals
+     * @param other Another rational to divide this by.
+     * @return A new rational representing the division.
+     * @throws Exception
+     */
 	public Rational div(Rational other) throws Exception {
         try{
             if(other.numerator == 0 || other.denominator == 0) throw new Exception("Can't devide by 0.");
@@ -140,23 +165,45 @@ public class Rational {
         }
 	}
 
+    /**
+     * Makes a copy of given rational.
+     * @param other the rational to be copied.
+     */
 	public void copyOf(Rational other) {
 		this.numerator = other.numerator;
 		this.denominator = other.denominator;
 	}
 	
 	// Added getters and setters for unittesting purposes.
+
+    /**
+     * Returns numerator.
+     * @return numerator.
+     */
 	public double getNumerator(){
 		return numerator;
 	}
-	
+
+    /**
+     * Returns denominator.
+     * @return denominator.
+     */
 	public double getDenominator() {
 		return denominator;
 	}
+
+    /**
+     * sets numerator.
+     * @param num value to set numerator to.
+     */
 	public void setNumerator(double num){
 		numerator = num;
 	}
-	
+
+    /**
+     * sets denominator.
+     * @param den value to set denominator to.
+     */
 	public void setDenominator(double den) {
 		denominator = den;
 	}
