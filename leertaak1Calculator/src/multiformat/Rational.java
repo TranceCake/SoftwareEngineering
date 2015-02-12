@@ -23,6 +23,7 @@ package multiformat;
  * @author J.Balj�: Added comments
  * @author Niek Gigengack <n.gigengack@st.hanze.nl>
  * @author Tanja Galama <t.a.t.galama@st.hanze.nl>
+ * @version v1.1
  */
 public class Rational {
 	static final double PRECISION=10;
