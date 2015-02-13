@@ -9,6 +9,7 @@ import java.awt.*;
 public class CalculatorMVC extends JApplet{
 
     ButtonView buttonView;
+    OutputView outputView;
 
     public void init() {
 
@@ -33,5 +34,8 @@ public class CalculatorMVC extends JApplet{
         buttonView = new ButtonView();
         buttonView.setBackground(Color.white);
         getContentPane().add(buttonView,BorderLayout.SOUTH);
+        outputView = new OutputView();
+        outputView.setBackground(Color.white);
+        getContentPane().add(outputView,BorderLayout.NORTH);
     }
 }

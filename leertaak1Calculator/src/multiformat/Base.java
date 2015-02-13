@@ -30,7 +30,7 @@ public abstract class Base {
   static final int MAX_PRECISION = 10;  // max # of number after point
   double EPSILON;
 
-  Base(String p_name, int p_base, String p_digits){
+  public Base(String p_name, int p_base, String p_digits){
     name = p_name;
     base = p_base;
     digits = p_digits;
