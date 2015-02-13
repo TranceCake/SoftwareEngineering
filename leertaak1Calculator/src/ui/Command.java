@@ -115,5 +115,4 @@ public class Command {
     Command command = new Command();
     while(command.nextCommand());
   }
-
 }

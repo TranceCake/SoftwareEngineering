@@ -8,7 +8,7 @@ public class OctalBase extends Base{
     /**
      * Constructor
      */
-    OctalBase(){
+    public OctalBase(){
         super("oct", 8, "01234567");
     }
 }
