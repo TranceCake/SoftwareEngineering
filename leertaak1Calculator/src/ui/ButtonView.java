@@ -33,39 +33,41 @@ public class ButtonView extends JPanel implements ActionListener {
 
 
     public ButtonView() {
-        this.setLayout(new GridLayout(6,4));
-        this.add(b1);
-        b1.addActionListener(this);
-        this.add(b2);
-        b2.addActionListener(this);
-        this.add(b3);
-        b3.addActionListener(this);
-        this.add(b4);
-        b4.addActionListener(this);
-        this.add(b5);
-        b5.addActionListener(this);
-        this.add(b6);
-        b6.addActionListener(this);
+        this.setLayout(new GridLayout(4,6));
         this.add(b7);
         b7.addActionListener(this);
         this.add(b8);
         b8.addActionListener(this);
         this.add(b9);
         b9.addActionListener(this);
-        this.add(b0);
-        b0.addActionListener(this);
-        this.add(dot);
-        dot.addActionListener(this);
         this.add(div);
         div.addActionListener(this);
+        this.add(b4);
+        b4.addActionListener(this);
+        this.add(b5);
+        b5.addActionListener(this);
+        this.add(b6);
+        b6.addActionListener(this);
         this.add(mul);
         mul.addActionListener(this);
-        this.add(add);
-        add.addActionListener(this);
+        this.add(b1);
+        b1.addActionListener(this);
+        this.add(b2);
+        b2.addActionListener(this);
+        this.add(b3);
+        b3.addActionListener(this);
         this.add(sub);
         sub.addActionListener(this);
+        this.add(dot);
+        dot.addActionListener(this);
+        this.add(b0);
+        b0.addActionListener(this);
         this.add(res);
         res.addActionListener(this);
+        this.add(add);
+        add.addActionListener(this);
+
+
     }
 
     @Override
