@@ -4,15 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * Initiates the applet and adds the views
  * Created by Niek on 2/12/2015.
  */
 public class CalculatorMVC extends JApplet{
 
     ButtonView buttonView;
-    OutputView outputView;
 
+    /**
+     * initiates the applet
+     */
     public void init() {
 
+        //sets the look and feel of the applet.
         try {
             // Set System L&F
             UIManager.setLookAndFeel(
@@ -34,8 +38,6 @@ public class CalculatorMVC extends JApplet{
         buttonView = new ButtonView();
         buttonView.setBackground(Color.white);
         getContentPane().add(buttonView,BorderLayout.SOUTH);
-        outputView = new OutputView();
-        outputView.setBackground(Color.white);
-        getContentPane().add(outputView,BorderLayout.NORTH);
+
     }
 }

@@ -8,44 +8,92 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * dingen
+ * ButtonView is the view for all the buttons used in the calculator GUI
  */
 public class ButtonView extends JPanel implements ActionListener {
+
+    String answer;
+    JTextArea ansField;
 
     OutputView output;
     CalculatorController controller;
     Calculator c;
+    private JRadioButton r1;
+    private JRadioButton r2;
+    private JRadioButton r3;
+    private JRadioButton r4;
 
-    private JRadioButton r1 = new JRadioButton("Binary");
-    private JRadioButton r2 = new JRadioButton("Octal");
-    private JRadioButton r3 = new JRadioButton("Decimal");
-    private JRadioButton r4 = new JRadioButton("Hexadecimal");
+    private JButton b1;
+    private JButton b2;
+    private JButton b3;
+    private JButton b4;
+    private JButton b5;
+    private JButton b6;
+    private JButton b7;
+    private JButton b8;
+    private JButton b9;
+    private JButton b0;
 
-    private JButton b1 = new JButton("1");
-    private JButton b2 = new JButton("2");
-    private JButton b3 = new JButton("3");
-    private JButton b4 = new JButton("4");
-    private JButton b5 = new JButton("5");
-    private JButton b6 = new JButton("6");
-    private JButton b7 = new JButton("7");
-    private JButton b8 = new JButton("8");
-    private JButton b9 = new JButton("9");
-    private JButton b0 = new JButton("0");
-    private JButton bA = new JButton("A");
-    private JButton bB = new JButton("B");
-    private JButton bC = new JButton("C");
-    private JButton bD = new JButton("D");
-    private JButton bE = new JButton("E");
-    private JButton bF = new JButton("F");
-    private JButton cl = new JButton("C");
-    private JButton div = new JButton("/");
-    private JButton mul = new JButton("*");
-    private JButton add = new JButton("+");
-    private JButton sub = new JButton("-");
-    private JButton res = new JButton("=");
+    private JButton bA;
+    private JButton bB;
+    private JButton bC;
+    private JButton bD;
+    private JButton bE;
+    private JButton bF;
 
+    private JButton cl;
+    private JButton div;
+    private JButton mul;
+    private JButton add;
+    private JButton sub;
+    private JButton res;
+
+    /**
+     * Constructor for ButtonView initiates all buttons and adds actionlisteners to them.
+     */
     public ButtonView() {
-        this.setLayout(new GridLayout(5,4));
+
+        controller = new CalculatorController();
+        output = new OutputView();
+        c = new Calculator();
+        ansField = new JTextArea();
+        this.add(new JPanel());
+        this.add(new JPanel());
+        this.add(new JPanel());
+        this.add(ansField);
+        ansField.setEditable(false);
+
+        this.setLayout(new GridLayout(8,4));
+        r1 = new JRadioButton("Binary");
+        r2 = new JRadioButton("Octal");
+        r3 = new JRadioButton("Decimal");
+        r4 = new JRadioButton("Hexadecimal");
+
+        b1 = new JButton("1");
+        b2 = new JButton("2");
+        b3 = new JButton("3");
+        b4 = new JButton("4");
+        b5 = new JButton("5");
+        b6 = new JButton("6");
+        b7 = new JButton("7");
+        b8 = new JButton("8");
+        b9 = new JButton("9");
+        b0 = new JButton("0");
+
+        bA = new JButton("A");
+        bB = new JButton("B");
+        bC = new JButton("C");
+        bD = new JButton("D");
+        bE = new JButton("E");
+        bF = new JButton("F");
+
+        cl = new JButton("Clear");
+        div = new JButton("/");
+        mul = new JButton("*");
+        add = new JButton("+");
+        sub = new JButton("-");
+        res = new JButton("=");
+
 
         this.add(r1);
         r1.addActionListener(this);
@@ -56,38 +104,59 @@ public class ButtonView extends JPanel implements ActionListener {
         this.add(r4);
         r4.addActionListener(this);
 
+
+        this.add(bD);
+        bD.addActionListener(this);
+        this.add(bE);
+        bE.addActionListener(this);
+        this.add(bF);
+        bF.addActionListener(this);
+        this.add(cl);
+        cl.addActionListener(this);
+
+        this.add(bA);
+        bA.addActionListener(this);
+        this.add(bB);
+        bB.addActionListener(this);
+        this.add(bC);
+        bC.addActionListener(this);
+        this.add(div);
+        div.addActionListener(this);
+
         this.add(b7);
         b7.addActionListener(this);
         this.add(b8);
         b8.addActionListener(this);
         this.add(b9);
         b9.addActionListener(this);
-        this.add(div);
-        div.addActionListener(this);
+        this.add(mul);
+        mul.addActionListener(this);
+
         this.add(b4);
         b4.addActionListener(this);
         this.add(b5);
         b5.addActionListener(this);
         this.add(b6);
         b6.addActionListener(this);
-        this.add(mul);
-        mul.addActionListener(this);
+        this.add(sub);
+        sub.addActionListener(this);
+
         this.add(b1);
         b1.addActionListener(this);
         this.add(b2);
         b2.addActionListener(this);
         this.add(b3);
         b3.addActionListener(this);
-        this.add(sub);
-        sub.addActionListener(this);
-        this.add(b0);
-        b0.addActionListener(this);
-        this.add(cl);
-        cl.addActionListener(this);
-        this.add(res);
-        res.addActionListener(this);
         this.add(add);
         add.addActionListener(this);
+
+        this.add(new JPanel());
+        this.add(b0);
+        b0.addActionListener(this);
+        this.add(new JPanel());
+        this.add(res);
+        res.addActionListener(this);
+
 
         ButtonGroup bases = new ButtonGroup();
         bases.add(r1);
@@ -96,11 +165,26 @@ public class ButtonView extends JPanel implements ActionListener {
         bases.add(r4);
     }
 
+    /**
+     * updateView updates the output textfield.
+     */
+    public void updateView(){
+        ansField.setText(c.firstOperand() + " " + c.secondOperand() + " - " + answer);
+        repaint();
+    }
+
     @Override
+    /**
+     * actionPerfomed handles all events triggered by the buttons.
+     * @param ActionEvent e The event that fired from the button.
+     *
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == b1) {
             controller.readInput("1");
-            output.setText("1");
+            answer = "1";
+            output.updateView();
+            repaint();
         } else if (e.getSource() == b2) {
             controller.readInput("2");
             output.setText("2");
@@ -171,6 +255,9 @@ public class ButtonView extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * disabelling buttons that are not used/permitted in binary base.
+     */
     public void setBinary() {
         b2.setEnabled(false);
         b3.setEnabled(false);
@@ -186,10 +273,13 @@ public class ButtonView extends JPanel implements ActionListener {
         bD.setEnabled(false);
         bE.setEnabled(false);
         bF.setEnabled(false);
-        output.updateView();
+        updateView();
         repaint();
     }
 
+    /**
+     * disabelling buttons that are not used/permitted in octal base.
+     */
     public void setOctal() {
         b2.setEnabled(true);
         b3.setEnabled(true);
@@ -205,10 +295,13 @@ public class ButtonView extends JPanel implements ActionListener {
         bD.setEnabled(false);
         bE.setEnabled(false);
         bF.setEnabled(false);
-        output.updateView();
+        updateView();
         repaint();
     }
 
+    /**
+     * disabelling buttons that are not used/permitted in decimal base.
+     */
     public void setDecimal() {
         b2.setEnabled(true);
         b3.setEnabled(true);
@@ -224,10 +317,13 @@ public class ButtonView extends JPanel implements ActionListener {
         bD.setEnabled(false);
         bE.setEnabled(false);
         bF.setEnabled(false);
-        output.updateView();
+        updateView();
         repaint();
     }
 
+    /**
+     * enabbeling all buttons that had been disabled in other bases.
+     */
     public void setHex() {
         b2.setEnabled(true);
         b3.setEnabled(true);
@@ -236,14 +332,42 @@ public class ButtonView extends JPanel implements ActionListener {
         b6.setEnabled(true);
         b7.setEnabled(true);
         b8.setEnabled(true);
-        b9.setEnabled(false);
-        bA.setEnabled(false);
-        bB.setEnabled(false);
-        bC.setEnabled(false);
-        bD.setEnabled(false);
-        bE.setEnabled(false);
-        bF.setEnabled(false);
-        output.updateView();
+        b9.setEnabled(true);
+        bA.setEnabled(true);
+        bB.setEnabled(true);
+        bC.setEnabled(true);
+        bD.setEnabled(true);
+        bE.setEnabled(true);
+        bF.setEnabled(true);
+        updateView();
         repaint();
     }
+    public class OutputView extends JPanel {
+
+        String answer;
+        JTextArea ansField;
+        Calculator c;
+
+        /**
+         *
+         */
+        public OutputView() {
+            this.setLayout(new FlowLayout());
+            ansField = new JTextArea();
+            this.add(ansField);
+            ansField.setEditable(false);
+        }
+
+        public void updateView(){
+            ansField.setText("Haoi");
+            // ansField.setText(this.c.firstOperand() + " " + this.c.secondOperand() + " - " + answer);
+            repaint();
+        }
+
+        public void setText(String given){
+            this.answer = given;
+        }
+
+    }
+
 }
