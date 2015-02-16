@@ -48,14 +48,17 @@ public class ButtonView extends JPanel implements ActionListener {
     private JButton sub;
     private JButton res;
 
+    private String toShow;
+
     /**
      * Constructor for ButtonView initiates all buttons and adds actionlisteners to them.
      */
-    public ButtonView() {
+    public ButtonView(CalculatorController controller, Calculator c) {
 
-        controller = new CalculatorController();
-        output = new OutputView();
-        c = new Calculator();
+        toShow = "";
+        this.c = c;
+        this.controller = controller;
+
         ansField = new JTextArea();
         this.add(new JPanel());
         this.add(new JPanel());
@@ -182,63 +185,67 @@ public class ButtonView extends JPanel implements ActionListener {
         if (e.getSource() == b1) {
             controller.readInput("1");
             answer = "1";
-            output.updateView();
-            repaint();
+            makeText("1");
         } else if (e.getSource() == b2) {
             controller.readInput("2");
-            output.setText("2");
+            makeText("2");
         } else if (e.getSource() == b3) {
             controller.readInput("3");
-            output.setText("3");
+            makeText("3");
         } else if (e.getSource() == b4) {
             controller.readInput("4");
-            output.setText("4");
+            makeText("4");
         } else if (e.getSource() == b5) {
             controller.readInput("5");
-            output.setText("5");
+            makeText("5");
         } else if (e.getSource() == b6) {
             controller.readInput("6");
-            output.setText("6");
+            makeText("6");
         } else if (e.getSource() == b7) {
             controller.readInput("7");
-            output.setText("7");
+            makeText("7");
         } else if (e.getSource() == b8) {
             controller.readInput("8");
-            output.setText("8");
+            makeText("8");
         } else if (e.getSource() == b9) {
             controller.readInput("9");
-            output.setText("9");
+            makeText("9");
         } else if (e.getSource() == b0) {
             controller.readInput("0");
-            output.setText("0");
+            makeText("0");
         } else if (e.getSource() == bA) {
             controller.readInput("A");
-            output.setText("A");
+            makeText("A");
         } else if (e.getSource() == bB) {
             controller.readInput("B");
-            output.setText("B");
+            makeText("B");
         } else if (e.getSource() == bC) {
             controller.readInput("C");
-            output.setText("C");
+            makeText("C");
         } else if (e.getSource() == bD) {
             controller.readInput("D");
-            output.setText("D");
+            makeText("D");
         } else if (e.getSource() == bE) {
             controller.readInput("E");
-            output.setText("E");
+            makeText("E");
         } else if (e.getSource() == bF) {
             controller.readInput("F");
-            output.setText("F");
+            makeText("F");
         } else if (e.getSource() == div) {
             controller.setOperator("div");
+            makeText("/");
         } else if (e.getSource() == mul) {
             controller.setOperator("mul");
+            makeText("*");
         } else if (e.getSource() == add) {
             controller.setOperator("add");
+            makeText("+");
         } else if (e.getSource() == sub) {
             controller.setOperator("sub");
+            makeText("-");
         } else if (e.getSource() == res) {
             controller.preCalculate();
+            makeText("=");
         } else if (e.getSource() == r1) {
             c.setBase(new BinaryBase());
             setBinary();
@@ -252,6 +259,12 @@ public class ButtonView extends JPanel implements ActionListener {
             c.setBase(new HexBase());
             setHex();
         }
+    }
+
+    public void makeText(String input){
+
+        toShow += input;
+        ansField.setText(toShow);
     }
 
     /**

@@ -1,5 +1,7 @@
 package ui;
 
+import multiformat.Calculator;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,6 +12,8 @@ import java.awt.*;
 public class CalculatorMVC extends JApplet{
 
     ButtonView buttonView;
+    CalculatorController controller;
+    Calculator c;
 
     /**
      * initiates the applet
@@ -35,7 +39,9 @@ public class CalculatorMVC extends JApplet{
             // handle exception
         }
 
-        buttonView = new ButtonView();
+        controller = new CalculatorController();
+        c = new Calculator();
+        buttonView = new ButtonView(controller, c);
         buttonView.setBackground(Color.white);
         getContentPane().add(buttonView,BorderLayout.SOUTH);
 
