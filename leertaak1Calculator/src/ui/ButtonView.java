@@ -55,7 +55,7 @@ public class ButtonView extends JPanel implements ActionListener {
         r3.addActionListener(this);
         this.add(r4);
         r4.addActionListener(this);
-
+        
         this.add(b7);
         b7.addActionListener(this);
         this.add(b8);
