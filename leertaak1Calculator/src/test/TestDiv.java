@@ -8,6 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Tanja on 12-2-2015.
+ * This unit test tests the division by 0
  */
 public class TestDiv extends TestCase{
 
@@ -15,11 +16,17 @@ public class TestDiv extends TestCase{
     Rational r;
 
     @Before
+    /**
+     * setUp sets the new Rationals.
+     */
     public void setUp(){
         r = new Rational();
         s = new Rational();
     }
 
+    /**
+     * testDiv tests the Rationals with given values.
+     */
     public void testDiv() {
 
         r.setNumerator(12.5);
