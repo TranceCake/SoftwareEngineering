@@ -7,7 +7,7 @@ import multiformat.Rational;
 import java.util.Stack;
 
 /**
- * Controller for handling traffic from and to the GUI.
+ * blablablalbablablalbla
  */
 public class CalculatorController {
     private Stack<String> st1 = new Stack<String>();
@@ -16,13 +16,10 @@ public class CalculatorController {
     private Stack<String> st2Invert = new Stack<String>();
     private boolean first = true;
     Calculator c;
+    OutputView output;
     private String operator;
 
 
-    /**
-     * Reads input sent by actionListeners.
-     * @param input information sent by actionListeners
-     */
     public void readInput(String input) {
         if (first) {
             if (!input.equals("div") && !input.equals("mul") && !input.equals("sub") && input.equals("add")) {
@@ -34,17 +31,10 @@ public class CalculatorController {
         }
     }
 
-    /**
-     * sets the operator for doing calculations.
-     * @param op the operator the user clicked on
-     */
     public void setOperator(String op) {
         this.operator = op;
     }
 
-    /**
-     * reverses the stack so the numbers are in correct order.
-     */
     public void preCalculate() {
         String temp;
         while(!st1.empty()) {
@@ -58,9 +48,6 @@ public class CalculatorController {
         calculate();
     }
 
-    /**
-     * calls all the calculational functions.
-     */
     public void calculate() {
         String op1 = "";
         String op2 = "";

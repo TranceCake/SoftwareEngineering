@@ -10,6 +10,7 @@ public class GetalRij {
 		// Belangrijke aanname: aantal < max, anders kunnen de getallen niet uniek zijn.
 		getallen = new int[aantal];
 		vulArrayMetUniekeWaarden( aantal, max );
+
 	}
 
 	private void vulArrayMetUniekeWaarden(int aantal, int max) {
@@ -29,15 +30,57 @@ public class GetalRij {
 	}
 	
 	public boolean zitErinA( int zoekWaarde ){
-		return false;
-	}
+        boolean exists = false;
 
-	public boolean zitErinB( int zoekWaarde ){
-		return false;
-	}
+        int i = 0;
+        while (i < getallen.length){
+            if (getallen[i] == zoekWaarde) {
+                exists = true;
+                i++;
+            }
+            else{
+                i++;
+            }
+        }
+        return exists;
+
+    }
+
+
+	public boolean zitErinB( int zoekWaarde ) {
+        int i = 0;
+        while (i < getallen.length) {
+            if (getallen[i] == zoekWaarde) {
+                return true;
+            } else {
+                i++;
+            }
+        }
+        return false;
+    }
 
 	public boolean zitErinC( int zoekWaarde ){
-		return false;
+        sorteer();
+        for(int i = 0 ; i < getallen.length ; i++){
+            System.out.println(getallen[i]);
+        }
+        int x = getallen.length/2;
+        while(getallen[x] != zoekWaarde) {
+            if(getallen[x] < zoekWaarde) {
+                if(x == (int) Math.floor(x * 1.5)) {
+                    return false;
+                } else {
+                    x = (int) Math.floor(x * 1.5);
+                }
+            } else if(getallen[x] > zoekWaarde){
+                if(x == (int) Math.ceil(x / 2)) {
+                    return false;
+                } else {
+                    x = (int) Math.ceil(x / 2);
+                }
+            }
+        }
+		return true;
 	}
 
 	public boolean zitErinD( int zoekWaarde ){
