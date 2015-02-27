@@ -61,9 +61,34 @@ public class GetalRij {
 
 	public boolean zitErinC( int zoekWaarde ){
         sorteer();
-        for(int i = 0 ; i < getallen.length ; i++){
+        for(int i = 0 ;  i < getallen.length ; i++){
             System.out.println(getallen[i]);
         }
+//        System.out.println("hoi" + getallen[(getallen.length/2)]);
+        if(zoekWaarde >= getallen[(getallen.length/2)]) {
+            for(int i = (getallen.length - 1) ; i > 0 ; i--){
+//                System.out.println(getallen[i]);
+                if(zoekWaarde == getallen[i]){
+                    return true;
+                }else if(getallen[i] < zoekWaarde){
+                    break;
+                }
+            }
+        }else{
+            for(int i = 0 ; i < (getallen.length - 1) ; i++){
+//                System.out.println(getallen[i]);
+                if(zoekWaarde == getallen[i]){
+                    return true;
+                }else if(getallen[i] > zoekWaarde){
+                    break;
+                }
+            }
+        }
+        return false;
+	}
+
+	public boolean zitErinD( int zoekWaarde ){
+
         int x = getallen.length/2;
         while(getallen[x] != zoekWaarde) {
             if(getallen[x] < zoekWaarde) {
@@ -80,11 +105,7 @@ public class GetalRij {
                 }
             }
         }
-		return true;
-	}
-
-	public boolean zitErinD( int zoekWaarde ){
-		return false;
+        return true;
 	}
 	
 	public void sorteer(){

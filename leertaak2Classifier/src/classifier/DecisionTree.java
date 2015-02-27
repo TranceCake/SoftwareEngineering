@@ -30,12 +30,21 @@ import java.util.Map;
 public class DecisionTree implements Classifier {
 
 	private Node root;
+    private int items;
 
-	public DecisionTree(Node tree){
+    public DecisionTree(Node tree){
 		root = tree;
 	}
 
-	/**
+    /**
+     * Method to set the number of items used.
+     */
+    public void setItems(int items){
+        this.items = items;
+    }
+
+
+    /**
 	 * Assign a category to an item. This is the implementation of algorithm
 	 * 4.1 on page 53 of the book.
 	 * @param item The Item which has to be classified by the algorithm.
