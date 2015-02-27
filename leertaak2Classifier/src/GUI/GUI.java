@@ -42,7 +42,7 @@ public class GUI implements ActionListener {
     public void makeFrame(){
         JFrame frame = new JFrame();
         frame.setSize(400, 300);
-        frame.setTitle("Auto Classifier");
+        frame.setTitle("Car Classifier");
         frame.setResizable(false);
         frame.setLayout(new BorderLayout());
 
@@ -58,7 +58,7 @@ public class GUI implements ActionListener {
         question1Panel.setLayout(new FlowLayout());
         JLabel question1 = new JLabel();
         question1Panel.add(question1);
-        question1.setText("Heeft de auto airco?");
+        question1.setText("Does the car have airco?");
 
         radioButtonYes1 = new JRadioButton("yes");
         radioButtonYes1.addActionListener(this);
@@ -81,7 +81,7 @@ public class GUI implements ActionListener {
         question2Panel.setLayout(new FlowLayout());
         JLabel question2 = new JLabel();
         question2Panel.add(question2);
-        question2.setText("Heeft de auto ABS?");
+        question2.setText("Does the car have ABS?");
 
         radioButtonYes2 = new JRadioButton("yes");
         radioButtonYes2.addActionListener(this);
@@ -104,7 +104,7 @@ public class GUI implements ActionListener {
         question3Panel.setLayout(new FlowLayout());
         JLabel question3 = new JLabel();
         question3Panel.add(question3);
-        question3.setText("Welk kleur heeft U auto?");
+        question3.setText("What color does the car have?");
 
         radioButtonRed = new JRadioButton("red");
         radioButtonRed.addActionListener(this);
@@ -141,7 +141,7 @@ public class GUI implements ActionListener {
 
         questionsPanel.add(status);
 
-        submit = new JButton("Toon resultaat");
+        submit = new JButton("Show");
         submit.addActionListener(this);
         questionsPanel.add(submit);
 
@@ -185,7 +185,6 @@ public class GUI implements ActionListener {
                 else if(answerString1 == "0" && answerString2 == "0")
                     answer4 = "Low";
 
-                //String category = " Airco: "+answerString1+" ABS: "+answerString2+" Kleur: "+answerString3+" Tarief: ";
                 String category = " Airco: " + answer1 + "   ABS: " + answer2 + "   Color: " + answerString3 + "   InsuranceRate: " + answer4;
                 status.setText(category);
             }
