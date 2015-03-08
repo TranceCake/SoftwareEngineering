@@ -3,26 +3,25 @@ package dynProg.solvers;
 import dynProg.Solver;
 
 /**
- * Created by Tanja on 7-3-2015.
+ * Created by Tanja en Njiek
  */
 public class RecursiveSolver implements Solver {
 
-    public RecursiveSolver() {
-
-    }
+    public RecursiveSolver() {}
 
     @Override
     public boolean solve(int[] numbers, int sum) {
-        if (sum == 0) { //without adding anything you have 0 as a sum
+
+        if(sum == 0) { //without adding anything you have 0 as a sum
             return true;
         }
-        if (numbers.length == 0) { //you can't make a sum without any numbers
+        if(numbers.length == 0) { //you can't make a sum without any numbers
             return false;
         }
 
         int n = numbers.length - 1; //make a subproblem with 1 less in the int array
         int[] rec = new int[n];
-        for (int i = 0; i < n; i++) { //loop through the array
+        for(int i = 0; i < n; i++) { //loop through the array
             rec[i] = numbers[i];
         }
 
