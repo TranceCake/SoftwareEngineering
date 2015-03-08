@@ -107,7 +107,6 @@ public class TicTacToe
     public boolean moveOk(int move)
     {
         return ( move>=0 && move <=8 && board[move/3 ][ move%3 ] == EMPTY );
-        //return true;
     }
 
     // play move
@@ -131,7 +130,7 @@ public class TicTacToe
     {
         for(int i  = 0; i < 2; i++) {
             for(int j = 0; j < 2; j++) {
-                if(board[i][j] == 2)
+                if(board[i][j] == EMPTY)
                     return false;
             }
         }
@@ -147,8 +146,8 @@ public class TicTacToe
             }
         }
 
-        for(int i = 0; i < 3; i++) {
-            if((board[0][i] == side) && (board[1][i] == side) && (board[2][i] == side)) {
+        for(int j = 0; j < 3; j++) {
+            if((board[0][j] == side) && (board[1][j] == side) && (board[2][j] == side)) {
                 return true;
             }
         }
@@ -176,16 +175,15 @@ public class TicTacToe
     // Compute static value of current position (win, draw, etc.)
     public int positionValue( )
     {
-        if (isAWin(HUMAN))
+        if (isAWin(HUMAN)) {
             return HUMAN_WIN;
-
-        if (isAWin(COMPUTER))
+        } else if (isAWin(COMPUTER)) {
             return COMPUTER_WIN;
-
-        if (boardIsFull())
+        } else if (boardIsFull()) {
             return DRAW;
-
-        return UNCLEAR;
+        } else {
+            return UNCLEAR;
+        }
     }
 
     public String toString()
