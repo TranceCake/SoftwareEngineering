@@ -1,5 +1,6 @@
 package huffman;
 
+import java.io.IOException;
 import java.util.Arrays;
 import junit.framework.TestCase;
 
@@ -80,4 +81,25 @@ public class TestHzip extends TestCase {
 		result = support.readFile(support.testFileDec);
 		assertTrue(Arrays.equals(support.text2, result));
 	}
+
+    public void testAdat(){
+        try{
+            Hzip.compress(support.testFileADat);
+        }catch(IOException e){
+            System.out.println("Error while compressing");
+            return;
+        }
+
+        try{
+            Hzip.uncompress(support.testFileADat + ".huf");
+        }catch(IOException e){
+            System.out.println("Error while uncompressing");
+        }
+
+        int[] original = support.readFile(support.testFileADat);
+        int[] compressed = support.readFile(support.testFileADat + ".uc");
+
+        assertTrue(Arrays.equals(original,compressed));
+
+    }
 }

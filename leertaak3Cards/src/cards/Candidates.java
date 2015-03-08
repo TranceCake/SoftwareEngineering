@@ -15,7 +15,7 @@ public Candidate remove(int index) //overwrites super.remove
 {
     Candidate candidate=get(index);
     candidate.takeOne();
-    //System.out.println("remove index "+index +" "+ candidate);
+   // System.out.println("remove index "+index +" "+ candidate);
     if (candidate.getAvailable()==0)
      {
          candidate=super.remove(index);
@@ -26,7 +26,7 @@ public Candidate remove(int index) //overwrites super.remove
 public void add (int index, Candidate candidate) //overwrites super.add
 {
       candidate.addOne();
-      //System.out.println("add index "+ index + " "+ candidate);
+   ///   System.out.println("add index "+ index + " "+ candidate);
       if (candidate.getAvailable()==1)
       {
           super.add(index,candidate);
