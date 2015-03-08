@@ -9,6 +9,7 @@ public class Support {
 	String testFilePlain = "testHuffman.txt";
 	String testFileEnc = "testHuffman.txt.huf";
 	String testFileDec = "testHuffman.txt.uc";
+    String testFileADat = "testA.dat";
 	
 	
 	/* Below are our 2 testing texts. All these texts are int arrays rather than just strings to make it
@@ -51,7 +52,7 @@ public class Support {
 		}; 
 	
 	// text: -- excluding this line
-	// This is a really good tèst.
+	// This is a really good tï¿½st.
 	int[] text2 = {
 			0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x61, 0x20, 0x72, 0x65, 0x61, 0x6C, 0x6C, 0x79,
 			0x20, 0x67, 0x6F, 0x6F, 0x64, 0x20, 0x74, 0xE8, 0x73, 0x74, 0x2E
