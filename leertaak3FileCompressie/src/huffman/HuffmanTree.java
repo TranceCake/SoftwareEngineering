@@ -79,10 +79,29 @@ public class HuffmanTree
 	 /**
 	  * Get the character corresponding to code.
 	  */
-	 public int getChar( String code )
-	 {
-	     // TODO = opdracht
-	 }
+	 public int getChar( String code ) {
+         HuffNode parent = root;
+
+         for (int i = 0; i < code.length(); i++) {
+             char c = code.charAt(i);
+
+             if (parent == null) {
+                 break;
+             }
+
+             if (c == '1') {
+                 parent = parent.left;
+             } else {
+                 parent = parent.right;
+             }
+         }
+
+         if (parent == null) {
+             return ERROR;
+         } else {
+             return parent.value;
+         }
+     }
 	 
 	 /**
 	  * Writes an encoding table to an output stream.
@@ -153,9 +172,17 @@ public class HuffmanTree
 	             theNodes[ i ] =  newNode;
 	             ar.add( newNode );
 	         }
-	              
-	     // TODO = opdracht      
-	     
-	     root = ar.remove(0);
-	 }
+         Collections.sort(ar);
+         HuffNode left = ar.remove(0);
+         HuffNode right = ar.remove(0);
+
+         int weight = left.weight + right.weight;
+         HuffNode result = new HuffNode(INCOMPLETE_CODE, weight, left, right, null);
+
+         left.parent = result;
+         right.parent = result;
+
+         ar.add(result);
+         root = ar.remove(0);
+     }
 }

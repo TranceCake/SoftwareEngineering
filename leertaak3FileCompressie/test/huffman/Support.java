@@ -9,7 +9,7 @@ public class Support {
 	String testFilePlain = "testHuffman.txt";
 	String testFileEnc = "testHuffman.txt.huf";
 	String testFileDec = "testHuffman.txt.uc";
-    String testFileADat = "testA.dat";
+    String testFileADat = "C://Users/Tanja/Documents/Jaar 2/SoftwareEngineering/leertaak3FileCompressie/TestA.dat";
 	
 	
 	/* Below are our 2 testing texts. All these texts are int arrays rather than just strings to make it
