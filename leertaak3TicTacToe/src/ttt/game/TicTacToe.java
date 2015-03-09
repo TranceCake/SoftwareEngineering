@@ -75,13 +75,14 @@ public class TicTacToe
             opp = HUMAN;
         }
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
                 if (squareIsEmpty(i, j)) {
 
                     place(i, j, side);
                     if (side == HUMAN) {
                         reply = chooseMove(opp);
+                        place(i,j,EMPTY);
                         if (reply.val < value) {
                             bestRow = i;
                             bestColumn = j;
@@ -89,13 +90,13 @@ public class TicTacToe
                         }
                     } else {
                         reply = chooseMove(opp);
+                        place(i,j,EMPTY);
                         if (reply.val > value) {
                             bestRow = i;
                             bestColumn = j;
                             value = reply.val;
                         }
                     }
-                    place(i,j,EMPTY);
                 }
             }
         }
@@ -128,9 +129,9 @@ public class TicTacToe
 
     private boolean boardIsFull( )
     {
-        for(int i  = 0; i < 2; i++) {
-            for(int j = 0; j < 2; j++) {
-                if(board[i][j] == EMPTY)
+        for(int i  = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                if(squareIsEmpty(i,j))
                     return false;
             }
         }
