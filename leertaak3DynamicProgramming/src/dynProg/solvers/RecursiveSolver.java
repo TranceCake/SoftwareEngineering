@@ -3,16 +3,15 @@ package dynProg.solvers;
 import dynProg.Solver;
 
 /**
- * Created by Tanja on 7-3-2015.
+ * Created by Tanja en Njiek
  */
 public class RecursiveSolver implements Solver {
 
-    public RecursiveSolver() {
-
-    }
+    public RecursiveSolver() {}
 
     @Override
     public boolean solve(int[] numbers, int sum) {
+
         if(sum == 0) return true;
         else if(sum<0)return false;
         else if(numbers.length == 0)return false;
@@ -31,6 +30,7 @@ public class RecursiveSolver implements Solver {
             if (solve(newNumbers,newSum)) {
                 return true;
             }
+
         }
         return false;
     }

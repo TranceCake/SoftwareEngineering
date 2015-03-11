@@ -52,7 +52,6 @@ public class TicTacToe
     {
         Best best=chooseMove(COMPUTER);
         return best.row*3+best.column;
-        //return 0;
     }
 
     // Find optimal move
@@ -63,34 +62,41 @@ public class TicTacToe
         int simpleEval;       // Result of an immediate evaluation
         int bestRow = 0;
         int bestColumn = 0;
-        int value = 0;
+        int value;
 
         if( ( simpleEval = positionValue( ) ) != UNCLEAR )
-            return new Best( simpleEval );
+            return new Best(simpleEval);
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        if(side == HUMAN) {
+            value = COMPUTER_WIN;
+            opp = COMPUTER;
+        } else {
+            value = HUMAN_WIN;
+            opp = HUMAN;
+        }
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
                 if (squareIsEmpty(i, j)) {
-                    //System.out.println("pass emty");
+
                     place(i, j, side);
-                    if (side == 1) {
-                        reply = chooseMove(0);
-                        if (reply.val > value) {
-                            bestRow = i;
-                            bestColumn = j;
-                            value = reply.val;
-                        }
-                    } else {
-                        reply = chooseMove(1);
+                    if (side == HUMAN) {
+                        reply = chooseMove(opp);
+                        place(i,j,EMPTY);
                         if (reply.val < value) {
                             bestRow = i;
                             bestColumn = j;
                             value = reply.val;
                         }
+                    } else {
+                        reply = chooseMove(opp);
+                        place(i,j,EMPTY);
+                        if (reply.val > value) {
+                            bestRow = i;
+                            bestColumn = j;
+                            value = reply.val;
+                        }
                     }
-                    place(i,j,2);
-                } else {
-                    System.out.println("pass full: " + i + "." + j);
                 }
             }
         }
@@ -102,7 +108,6 @@ public class TicTacToe
     public boolean moveOk(int move)
     {
         return ( move>=0 && move <=8 && board[move/3 ][ move%3 ] == EMPTY );
-        //return true;
     }
 
     // play move
@@ -124,9 +129,9 @@ public class TicTacToe
 
     private boolean boardIsFull( )
     {
-        for(int i  = 0; i < 2; i++) {
-            for(int j = 0; j < 2; j++) {
-                if(board[i][j] == 2)
+        for(int i  = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                if(squareIsEmpty(i,j))
                     return false;
             }
         }
@@ -142,13 +147,19 @@ public class TicTacToe
             }
         }
 
-        for(int i = 0; i < 3; i++) {
-            if((board[0][i] == side) && (board[1][i] == side) && (board[2][i] == side)) {
+        for(int j = 0; j < 3; j++) {
+            if((board[0][j] == side) && (board[1][j] == side) && (board[2][j] == side)) {
                 return true;
             }
         }
 
-        return ((side == board[0][0]) && (side == board[1][1]) && (side == board[2][2])) || ((side == board[2][0]) && (side == board[1][1]) && (side == board[0][2]));
+        if((side == board[0][0]) && (side == board[1][1]) && (side == board[2][2])) {
+            return true;
+        } else if((side == board[2][0]) && (side == board[1][1]) && (side == board[0][2])) {
+            return true;
+        }
+
+        return false;
     }
 
     // Play a move, possibly clearing a square
@@ -165,16 +176,15 @@ public class TicTacToe
     // Compute static value of current position (win, draw, etc.)
     public int positionValue( )
     {
-        if (isAWin(0))
+        if (isAWin(HUMAN)) {
             return HUMAN_WIN;
-
-        if (isAWin(1))
+        } else if (isAWin(COMPUTER)) {
             return COMPUTER_WIN;
-
-        if (boardIsFull() && !isAWin(0) && !isAWin(1))
+        } else if (boardIsFull()) {
             return DRAW;
-
-        return UNCLEAR;
+        } else {
+            return UNCLEAR;
+        }
     }
 
     public String toString()

@@ -131,19 +131,51 @@ public class TicTacTest extends TestCase {
 
     public void testChooseMove() {
         TicTacToe t = new TicTacToe();
-        t.place(0,0,0);
-        t.place(1,1,1);
-        t.place(1,0,0);
 
+        t.place(0,0,0);
+        t.place(0,1,0);
+        t.place(1,2,1);
+
+        System.out.println("Testing defensive move:");
         System.out.print(t.toString());
-        //t.setComputerPlays();
 
         int compMove=t.chooseMove();
-        System.out.println("Computer Move = " + compMove);
+        System.out.println("Computer Move = " + compMove + " Ok.");
 
-        if(!(compMove == 6))
+        if(!(compMove == 2))
         {
             fail("Computer made the wrong move: "+ compMove);
+        }
+
+        t.place(0,0,1);
+        t.place(0,1,1);
+        t.place(1,2,0);
+
+        System.out.println("Testing offensive move:");
+        System.out.print(t.toString());
+
+        compMove=t.chooseMove();
+        System.out.println("Computer Move = " + compMove + " Ok.");
+
+        if(!(compMove == 2))
+        {
+            fail("Computer made the wrong move: "+ compMove);
+        }
+
+        t.place(0,0,1);
+        t.place(0,1,1);
+        t.place(1,1,0);
+        t.place(1,2,0);
+
+        System.out.println("Testing offensive or defensive move:");
+        System.out.print(t.toString());
+
+        compMove=t.chooseMove();
+        System.out.println("Computer Move = " + compMove + " Ok.");
+
+        if(!(compMove == 2))
+        {
+            fail("Computer moved defensively...: "+ compMove);
         }
     }
 }
