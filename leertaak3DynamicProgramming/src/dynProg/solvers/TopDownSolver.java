@@ -19,7 +19,8 @@ import java.util.List;
 // 3: 3, 5, 7
 // 4: 3, 5, 7, 9
 // 5: 3, 5, 7, 9, 11
-public class TopDownSolver implements Solver {
+public class
+        TopDownSolver implements Solver {
 
     private int[][] matrix;
     private static List<Solution> solutions;

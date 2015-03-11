@@ -49,6 +49,7 @@ public class DrawTreeGui {
 		HashMap<String, Integer> widthCountTree = new HashMap<String,Integer>();
 		int width = frame.getSize().width;
 		// get all the information out of the .toString()
+        //System.out.println(tree.toString());
 		while(check){
 			String line = treeSplitted.get(counter+1);
 			if (line.contains("[") && line.contains("]")){
