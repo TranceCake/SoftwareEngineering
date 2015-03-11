@@ -12,19 +12,26 @@ public class RecursiveSolver implements Solver {
     @Override
     public boolean solve(int[] numbers, int sum) {
 
-        if(sum == 0) { //without adding anything you have 0 as a sum
-            return true;
-        }
-        if(numbers.length == 0) { //you can't make a sum without any numbers
-            return false;
-        }
+        if(sum == 0) return true;
+        else if(sum<0)return false;
+        else if(numbers.length == 0)return false;
 
-        int n = numbers.length - 1; //make a subproblem with 1 less in the int array
-        int[] rec = new int[n];
-        for(int i = 0; i < n; i++) { //loop through the array
-            rec[i] = numbers[i];
-        }
+        int[] newNumbers = new int[numbers.length-1];
+        for (int i = numbers.length; i>0; i--){
+            int newSum = sum - numbers[i-1];
+            for (int j=0; j<numbers.length; j++)
+            {
+                if (j>i-1) {
+                    newNumbers[j-1] = numbers[j];
+                } else if (j<i-1) {
+                    newNumbers[j] = numbers[j];
+                }
+            }
+            if (solve(newNumbers,newSum)) {
+                return true;
+            }
 
-        return solve(rec, sum) || solve(rec, sum - numbers[n]);
+        }
+        return false;
     }
 }

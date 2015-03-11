@@ -89,7 +89,7 @@ public class MakeTreeFromFile {
 			totaalCatGroup+=catGroup[i];
 		}		
 		if (totaalCatGroup!=totalAmount){
-			// the sum is no the same as it schould be
+			// the sum is no the same as it should be
 			return false;
 		}		
 		return true;
@@ -132,9 +132,9 @@ public class MakeTreeFromFile {
 	            //(2*n)+1
 	        // add the node's and the leafs
 	        for (int i=0; i<Math.pow(2,lineNumber)-1;i++){
-	            Node node = (Node)optionList.get(i);
-	            node.addChild("yes",(Node)optionList.get((2*i)+1));
-	            node.addChild("no",(Node)optionList.get((2*i)+2));
+	            Node node = optionList.get(i);
+	            node.addChild("yes",optionList.get((2*i)+1));
+	            node.addChild("no",optionList.get((2*i)+2));
 			}
 	        iroot = root;
         }

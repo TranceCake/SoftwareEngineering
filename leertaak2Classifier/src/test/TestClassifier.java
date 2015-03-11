@@ -72,19 +72,19 @@ public class TestClassifier extends TestCase {
 		Item item = new Item("car",features);
 		
 		String category = dt.assignCategory(item);
-		assertEquals("high",category);
+		assertEquals("Airbag",category);
 		
 		
 		item.setFeatureValue("AC","no");
 		category = dt.assignCategory(item);
-		assertEquals("medium",category);
+		assertEquals("high",category);
 
 		item.setFeatureValue("ABS","no");
 		category = dt.assignCategory(item);
-		assertEquals("low",category);
+		assertEquals("medium",category);
 
         item.setFeatureValue("Airbag","no");
         category = dt.assignCategory(item);
-        assertEquals("low",category);
+        assertEquals("medium",category);
 	}
 }

@@ -24,6 +24,7 @@ public class GUI implements ActionListener {
     private JRadioButton radioButtonRed, radioButtonBlack, radioButtonWhite, radioButtonBlue, radioButtonGreen, radioButtonSilver;
     private String answer1, answer2;
     private String answer3 = "", answerString3;
+   // private DecisionTree tree;
     private Fuzzy fuzzy;
 
     public static void main(String[] args){
@@ -35,120 +36,180 @@ public class GUI implements ActionListener {
      */
     public GUI() {
         makeFrame();
-
+   //     makeTree();
         fuzzy = new Fuzzy();
     }
 
     public void makeFrame(){
-        JFrame frame = new JFrame();
-        frame.setSize(400, 300);
-        frame.setTitle("Car Classifier");
-        frame.setResizable(false);
-        frame.setLayout(new BorderLayout());
+        GUI = new JFrame();
+        GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        GUI.getContentPane().setLayout(null);
 
-        status = new JLabel();
+        lblTurbo = new JLabel("Heeft de auto Turbo?");
+        lblTurbo.setBounds(10, 11, 181, 14);
+        frmSimplegui.getContentPane().add(lblTurbo);
 
-        JPanel questionsPanel = new JPanel();
-        questionsPanel.setLayout(new GridLayout(5,1,5,5));
+        rdbtnJa1 = new JRadioButton("Ja");
+        rdbtnJa1.setBounds(6, 32, 63, 23);
+        GUI.getContentPane().add(rdbtnJa1);
 
-        // question 1
-        JPanel buttonPanel1 = new JPanel();
-        buttonPanel1.setLayout(new GridLayout(1,2));
-        JPanel question1Panel = new JPanel();
-        question1Panel.setLayout(new FlowLayout());
-        JLabel question1 = new JLabel();
-        question1Panel.add(question1);
-        question1.setText("Does the car have airco?");
+        rdbtnNee1 = new JRadioButton("Nee");
+        rdbtnNee1.setBounds(82, 32, 109, 23);
+        GUI.getContentPane().add(rdbtnNee1);
 
-        radioButtonYes1 = new JRadioButton("yes");
-        radioButtonYes1.addActionListener(this);
-        radioButtonNo1 = new JRadioButton("no");
-        radioButtonNo1.addActionListener(this);
+        ButtonGroup group1 = new ButtonGroup();
+        group1.add(rdbtnJa1);
+        group1.add(rdbtnNee1);
 
-        ButtonGroup radioButtonGroup1 = new ButtonGroup();
-        radioButtonGroup1.add(radioButtonYes1);
-        radioButtonGroup1.add(radioButtonNo1);
+        lblEngin = new JLabel("Heeft de auto EnginPower?");
+        lblEngin.setBounds(10, 69, 181, 14);
+        lblEngin.setVisible(false);
+        GUI.getContentPane().add(lblEngin);
 
-        question1Panel.add(question1);
-        buttonPanel1.add(radioButtonYes1);
-        buttonPanel1.add(radioButtonNo1);
-        question1Panel.add(buttonPanel1);
+        rdbtnJa2 = new JRadioButton("Ja");
+        rdbtnJa2.setBounds(10, 90, 63, 23);
+        rdbtnJa2.setVisible(false);
+        GUI.getContentPane().add(rdbtnJa2);
 
-        //question 2
-        JPanel buttonPanel2 = new JPanel();
-        buttonPanel2.setLayout(new GridLayout(1,2));
-        JPanel question2Panel = new JPanel();
-        question2Panel.setLayout(new FlowLayout());
-        JLabel question2 = new JLabel();
-        question2Panel.add(question2);
-        question2.setText("Does the car have ABS?");
+        rdbtnNee2 = new JRadioButton("Nee");
+        rdbtnNee2.setBounds(82, 90, 109, 23);
+        rdbtnNee2.setVisible(false);
+        GUI.getContentPane().add(rdbtnNee2);
 
-        radioButtonYes2 = new JRadioButton("yes");
-        radioButtonYes2.addActionListener(this);
-        radioButtonNo2 = new JRadioButton("no");
-        radioButtonNo2.addActionListener(this);
+        ButtonGroup group2 = new ButtonGroup();
+        group2.add(rdbtnJa2);
+        group2.add(rdbtnNee2);
 
-        ButtonGroup radioButtonGroup2 = new ButtonGroup();
-        radioButtonGroup2.add(radioButtonYes2);
-        radioButtonGroup2.add(radioButtonNo2);
+        lblSportBum = new JLabel("Heeft de auto SportBumper?");
+        lblSportBum.setBounds(14, 116, 181, 14);
+        lblSportBum.setVisible(false);
+        GUI.getContentPane().add(lblSportBum);
 
-        question2Panel.add(question2);
-        buttonPanel2.add(radioButtonYes2);
-        buttonPanel2.add(radioButtonNo2);
-        question2Panel.add(buttonPanel2);
+        rdbtnJa3 = new JRadioButton("Ja");
+        rdbtnJa3.setBounds(10, 137, 63, 23);
+        rdbtnJa3.setVisible(false);
+        frmSimplegui.getContentPane().add(rdbtnJa3);
 
-        //question 3
-        JPanel buttonPanel3 = new JPanel();
-        buttonPanel3.setLayout(new GridLayout(1,2));
-        JPanel question3Panel = new JPanel();
-        question3Panel.setLayout(new FlowLayout());
-        JLabel question3 = new JLabel();
-        question3Panel.add(question3);
-        question3.setText("What color does the car have?");
+        rdbtnNee3 = new JRadioButton("Nee");
+        rdbtnNee3.setBounds(82, 137, 109, 23);
+        rdbtnNee3.setVisible(false);
+        frmSimplegui.getContentPane().add(rdbtnNee3);
 
-        radioButtonRed = new JRadioButton("red");
-        radioButtonRed.addActionListener(this);
-        radioButtonBlack = new JRadioButton("black");
-        radioButtonBlack.addActionListener(this);
-        radioButtonWhite = new JRadioButton("white");
-        radioButtonWhite.addActionListener(this);
-        radioButtonBlue = new JRadioButton("blue");
-        radioButtonBlue.addActionListener(this);
-        radioButtonGreen = new JRadioButton("green");
-        radioButtonGreen.addActionListener(this);
-        radioButtonSilver = new JRadioButton("silver");
-        radioButtonSilver.addActionListener(this);
+        ButtonGroup group3 = new ButtonGroup();
+        group3.add(rdbtnJa3);
+        group3.add(rdbtnNee3);
 
-        ButtonGroup radioButtonGroup3 = new ButtonGroup();
-        radioButtonGroup3.add(radioButtonRed);
-        radioButtonGroup3.add(radioButtonBlack);
-        radioButtonGroup3.add(radioButtonWhite);
-        radioButtonGroup3.add(radioButtonBlue);
-        radioButtonGroup3.add(radioButtonGreen);
-        radioButtonGroup3.add(radioButtonSilver);
-        question3Panel.add(question3);
-        buttonPanel3.add(radioButtonRed);
-        buttonPanel3.add(radioButtonBlack);
-        buttonPanel3.add(radioButtonWhite);
-        buttonPanel3.add(radioButtonBlue);
-        buttonPanel3.add(radioButtonGreen);
-        buttonPanel3.add(radioButtonSilver);
-        question3Panel.add(buttonPanel3);
+        lblSportR = new JLabel("Heeft de auto SportRing?");
+        lblSportR.setBounds(10, 163, 181, 14);
+        lblSportR.setVisible(false);
+        frmSimplegui.getContentPane().add(lblSportR);
 
-        questionsPanel.add(question1Panel);
-        questionsPanel.add(question2Panel);
-        questionsPanel.add(question3Panel);
+        rdbtnJa4 = new JRadioButton("Ja");
+        rdbtnJa4.setBounds(10, 184, 63, 23);
+        rdbtnJa4.setVisible(false);
+        frmSimplegui.getContentPane().add(rdbtnJa4);
 
-        questionsPanel.add(status);
+        rdbtnNee4 = new JRadioButton("Nee");
+        rdbtnNee4.setBounds(82, 184, 109, 23);
+        rdbtnNee4.setVisible(false);
+        frmSimplegui.getContentPane().add(rdbtnNee4);
 
-        submit = new JButton("Show");
-        submit.addActionListener(this);
-        questionsPanel.add(submit);
+        ButtonGroup group4 = new ButtonGroup();
+        group4.add(rdbtnJa4);
+        group4.add(rdbtnNee4);
 
-        frame.add(questionsPanel, BorderLayout.CENTER);
-        frame.setDefaultCloseOperation(3); // EXIT_ON_CLOSE
-        frame.setVisible(true);
+        lblCruis = new JLabel("Heeft de auto CruisControll?");
+        lblCruis.setBounds(14, 210, 181, 14);
+        lblCruis.setVisible(false);
+        frmSimplegui.getContentPane().add(lblCruis);
+
+        rdbtnJa5 = new JRadioButton("Ja");
+        rdbtnJa5.setBounds(10, 231, 63, 23);
+        rdbtnJa5.setVisible(false);
+        frmSimplegui.getContentPane().add(rdbtnJa5);
+
+        rdbtnNee5 = new JRadioButton("Nee");
+        rdbtnNee5.setBounds(82, 231, 109, 23);
+        rdbtnNee5.setVisible(false);
+        frmSimplegui.getContentPane().add(rdbtnNee5);
+
+        ButtonGroup group5 = new ButtonGroup();
+        group5.add(rdbtnJa5);
+        group5.add(rdbtnNee5);
+
+        lblABS = new JLabel("Heeft de auto ABS?");
+        lblABS.setBounds(10, 257, 181, 14);
+        lblABS.setVisible(false);
+        frmSimplegui.getContentPane().add(lblABS);
+
+        rdbtnJa6 = new JRadioButton("Ja");
+        rdbtnJa6.setBounds(10, 278, 63, 23);
+        rdbtnJa6.setVisible(false);
+        frmSimplegui.getContentPane().add(rdbtnJa6);
+
+        rdbtnNee6 = new JRadioButton("Nee");
+        rdbtnNee6.setBounds(82, 278, 109, 23);
+        rdbtnNee6.setVisible(false);
+        frmSimplegui.getContentPane().add(rdbtnNee6);
+
+        ButtonGroup group6 = new ButtonGroup();
+        group6.add(rdbtnJa6);
+        group6.add(rdbtnNee6);
+
+        lblAC = new JLabel("Heeft de auto AC?");
+        lblAC.setBounds(10, 304, 181, 14);
+        lblAC.setVisible(false);
+        frmSimplegui.getContentPane().add(lblAC);
+
+        rdbtnJa7 = new JRadioButton("Ja");
+        rdbtnJa7.setBounds(10, 325, 63, 23);
+        rdbtnJa7.setVisible(false);
+        frmSimplegui.getContentPane().add(rdbtnJa7);
+
+        rdbtnNee7 = new JRadioButton("Nee");
+        rdbtnNee7.setBounds(82, 325, 109, 23);
+        rdbtnNee7.setVisible(false);
+        frmSimplegui.getContentPane().add(rdbtnNee7);
+
+        ButtonGroup group7 = new ButtonGroup();
+        group7.add(rdbtnJa7);
+        group7.add(rdbtnNee7);
+
+        lblMetal = new JLabel("Heeft de auto Metalic?");
+        lblMetal.setBounds(10, 351, 181, 14);
+        lblMetal.setVisible(false);
+        frmSimplegui.getContentPane().add(lblMetal);
+
+        rdbtnJa8 = new JRadioButton("Ja");
+        rdbtnJa8.setBounds(10, 372, 63, 23);
+        rdbtnJa8.setVisible(false);
+        frmSimplegui.getContentPane().add(rdbtnJa8);
+
+        rdbtnNee8 = new JRadioButton("Nee");
+        rdbtnNee8.setBounds(82, 372, 109, 23);
+        rdbtnNee8.setVisible(false);
+        frmSimplegui.getContentPane().add(rdbtnNee8);
+
+        ButtonGroup group8 = new ButtonGroup();
+        group8.add(rdbtnJa8);
+        group8.add(rdbtnNee8);
+
+        lblDeCategorieWaar = new JLabel("De categorie waar je auto onder valt is:");
+        lblDeCategorieWaar.setBounds(227, 11, 237, 14);
+        lblDeCategorieWaar.setVisible(false);
+        frmSimplegui.getContentPane().add(lblDeCategorieWaar);
+
+        lblCat = new JLabel("niks");
+        lblCat.setBounds(227, 36, 90, 14);
+        lblCat.setVisible(false);
+        frmSimplegui.getContentPane().add(lblCat);
     }
+/*
+
+    private void makeTree(){
+        tree = new ReadFile("TrainingSet.txt").getDecisionTree();
+    }
+*/
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == submit){
@@ -181,6 +242,8 @@ public class GUI implements ActionListener {
                 if (answerString1 == "1" && answerString2 == "1")
                     answer4 = "High";
                 else if(answerString1 == "1" && answerString2 == "0")
+                    answer4 = "Middle";
+                else if(answerString1 == "0" && answerString2 == "1")
                     answer4 = "Middle";
                 else if(answerString1 == "0" && answerString2 == "0")
                     answer4 = "Low";

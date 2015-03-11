@@ -23,6 +23,7 @@ public class ReadFile{
     private Map<Item, String> ReadFile = new HashMap<Item, String>();
     private Map<String, FeatureType> features = new HashMap<String, FeatureType>();
     private String[] options = new String[8];
+    private String file;
 
     // Create a FeatureType with Yes
     private final FeatureType featureType = new FeatureType("YesNo", new String[] { "1", "0"});
@@ -31,10 +32,15 @@ public class ReadFile{
     public DecisionTree tree;
 
 
+    public static void main(String[] args){
+            new ReadFile("TrainingSet.txt");
+    }
+
     /**
      * Constructor
      */
-    public ReadFile() {
+    public ReadFile(String file) {
+        this.file = file;
         try {
             // Create new BufferedReader
             this.ReadFileReader = new BufferedReader(new FileReader(TRAININGSET));
@@ -68,7 +74,7 @@ public class ReadFile{
      * @return
      * @throws IOException
      */
-    private DecisionTree readTrainingSet() throws IOException {
+    private DecisionTree readTrainingSet() throws IOException,ArrayIndexOutOfBoundsException {
         // Skip the first two lines for now
         ReadFileReader.readLine();
         ReadFileReader.readLine();
@@ -77,10 +83,13 @@ public class ReadFile{
         // Loop over the items
         while ((line = ReadFileReader.readLine()) != null) {
             String[] itemProperties = line.split(";");
-            String itemName = itemProperties[9];
-
-            // Fill the trainingsSet with this rows properties
-            this.ReadFile.put(getItem(itemProperties), itemName);
+            try {
+                String itemName = itemProperties[8];
+                // Fill the trainingsSet with this rows properties
+                this.ReadFile.put(getItem(itemProperties), itemName);
+            }catch(ArrayIndexOutOfBoundsException e){
+                e.printStackTrace();
+            }
         }
 
         // Build a new DecisionTree from the trainingsSet and features
@@ -98,7 +107,6 @@ public class ReadFile{
         String line;
         int index = 0;
 
-        // Parse the options text file and make an array out of it
         while ((line = optionsReader.readLine()) != null) {
             this.options[index] = line;
             index++;
@@ -126,9 +134,5 @@ public class ReadFile{
         Item newItem = new Item(itemProperties[0], features);
 
         return newItem;
-    }
-
-    public DecisionTree getTree() {
-        return tree;
     }
 }
