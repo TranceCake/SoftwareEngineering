@@ -74,7 +74,6 @@ public class OccupancyMapView extends JPanel implements ActionListener {
 					g.setColor(OccupancyMapView.MAP_ROBOT_COLOR);
 					g.fillRect(row * cellDimension, column * cellDimension, cellDimension, cellDimension);
 				}
-
 			}
 		}
 	}
@@ -99,7 +98,6 @@ public class OccupancyMapView extends JPanel implements ActionListener {
 			this.cellDimension = model.getCellDimension();
 			this.grid = model.getGrid();
 		}
-
 		repaint();
 	}
 }

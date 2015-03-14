@@ -44,14 +44,19 @@ public class MobileRobotAI implements Runnable {
 	public void run() {
 		String result;
 		this.running = true;
+        boolean secondRun = false;
 		double position[] = new double[3];
 		double measures[] = new double[360];
 		while (running) {
 			try {
 
-                if() {
-
+                if((map.isWallComplete() && secondRun)) {
+                    running = false;
+                    System.out.println("Done.");
+                    continue;
                 }
+
+                secondRun = true;
 
 				PipedInputStream pipeIn = new PipedInputStream();
 				BufferedReader input = new BufferedReader(new InputStreamReader(pipeIn));
@@ -73,7 +78,7 @@ public class MobileRobotAI implements Runnable {
 
                 if(measures[90] > 50 && measures[115] > 40 && measures[65] > 20) {
                     robot.sendCommand("P1.ROTATERIGHT 90");
-                    System.out.println("right");
+                    //System.out.println("right");
                     result = input.readLine();
                     robot.sendCommand("P1.MOVEFW 30");
                     result = input.readLine();
@@ -82,7 +87,7 @@ public class MobileRobotAI implements Runnable {
 
                 if(measures[0] <= 15) {
                     robot.sendCommand("P1.ROTATELEFT 90");
-                    System.out.println("left");
+                    //System.out.println("left");
                     result = input.readLine();
                     continue;
                 }
@@ -91,11 +96,11 @@ public class MobileRobotAI implements Runnable {
                     double distance = (measures[0] - 15);
                     String toMove = "P1.MOVEFW " + Double.toString(distance);
                     robot.sendCommand(toMove);
-                    System.out.println("tot obj");
+                    //System.out.println("tot obj");
                     result = input.readLine();
                 } else {
                     robot.sendCommand("P1.MOVEFW 40");
-                    System.out.println("fwd 30");
+                    //System.out.println("fwd 30");
                     result = input.readLine();
                 }
 

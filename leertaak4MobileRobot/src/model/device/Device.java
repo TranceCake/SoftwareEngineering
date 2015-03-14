@@ -42,8 +42,8 @@ public abstract class Device implements Runnable {
     // the arrayList with all the commands
     protected final ArrayList<String> commands;
     // the colors of the devices
-	protected Color backgroundColor = Color.red;
-	protected Color foregroundColor = Color.blue;
+	protected Color backgroundColor = Color.orange;
+	protected Color foregroundColor = Color.orange;
 
     // Is the device running?
 	protected boolean running;

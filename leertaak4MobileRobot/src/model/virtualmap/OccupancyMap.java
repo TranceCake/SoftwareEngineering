@@ -187,5 +187,19 @@ public class OccupancyMap {
 			}
 		}
 	}
-
+    public boolean isWallComplete() {
+        for(int i = 0; i < MAP_WIDTH / CELL_DIMENSION; i++) {
+            for(int j = 0; j < MAP_HEIGHT / CELL_DIMENSION; j++) {
+                if(grid[i][j] == EMPTY) {
+                    if(grid[i][j+1] == UNKNOWN ||
+                        grid[i][j-1] == UNKNOWN ||
+                        grid[i+1][j] == UNKNOWN ||
+                        grid[i-1][j] == UNKNOWN) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 }
