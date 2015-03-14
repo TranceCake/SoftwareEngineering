@@ -49,6 +49,10 @@ public class MobileRobotAI implements Runnable {
 		while (running) {
 			try {
 
+                if() {
+
+                }
+
 				PipedInputStream pipeIn = new PipedInputStream();
 				BufferedReader input = new BufferedReader(new InputStreamReader(pipeIn));
 				PrintWriter output = new PrintWriter(new PipedOutputStream(pipeIn), true);
@@ -56,7 +60,7 @@ public class MobileRobotAI implements Runnable {
 				robot.setOutput(output);
 
 //      ases where a variable value is never used after its assignment, i.e.:
-				System.out.println("intelligence running");
+				//System.out.println("intelligence running");
 
 				robot.sendCommand("R1.GETPOS");
 				result = input.readLine();
@@ -67,132 +71,34 @@ public class MobileRobotAI implements Runnable {
 				parseMeasures(result, measures);
 				map.drawLaserScan(position, measures);
 
-				robot.sendCommand("P1.MOVEBW 60");
-				result = input.readLine();
+                if(measures[90] > 50 && measures[115] > 40 && measures[65] > 20) {
+                    robot.sendCommand("P1.ROTATERIGHT 90");
+                    System.out.println("right");
+                    result = input.readLine();
+                    robot.sendCommand("P1.MOVEFW 30");
+                    result = input.readLine();
+                    continue;
+                }
 
-				robot.sendCommand("R1.GETPOS");
-				result = input.readLine();
-				parsePosition(result, position);
+                if(measures[0] <= 15) {
+                    robot.sendCommand("P1.ROTATELEFT 90");
+                    System.out.println("left");
+                    result = input.readLine();
+                    continue;
+                }
 
-				robot.sendCommand("L1.SCAN");
-				result = input.readLine();
-				parseMeasures(result, measures);
-				map.drawLaserScan(position, measures);
+                if(measures[0] > 15 && (measures[0] < 100)) {
+                    double distance = (measures[0] - 15);
+                    String toMove = "P1.MOVEFW " + Double.toString(distance);
+                    robot.sendCommand(toMove);
+                    System.out.println("tot obj");
+                    result = input.readLine();
+                } else {
+                    robot.sendCommand("P1.MOVEFW 40");
+                    System.out.println("fwd 30");
+                    result = input.readLine();
+                }
 
-				robot.sendCommand("P1.ROTATERIGHT 90");
-				result = input.readLine();
-
-				robot.sendCommand("P1.MOVEFW 100");
-				result = input.readLine();
-
-				robot.sendCommand("R1.GETPOS");
-				result = input.readLine();
-				parsePosition(result, position);
-
-				robot.sendCommand("L1.SCAN");
-				result = input.readLine();
-				parseMeasures(result, measures);
-				map.drawLaserScan(position, measures);
-
-				robot.sendCommand("P1.ROTATELEFT 45");
-				result = input.readLine();
-
-				robot.sendCommand("P1.MOVEFW 70");
-				result = input.readLine();
-
-				robot.sendCommand("R1.GETPOS");
-				result = input.readLine();
-				parsePosition(result, position);
-
-				robot.sendCommand("L1.SCAN");
-				result = input.readLine();
-				parseMeasures(result, measures);
-				map.drawLaserScan(position, measures);
-
-				robot.sendCommand("P1.MOVEFW 70");
-				result = input.readLine();
-
-				robot.sendCommand("P1.ROTATERIGHT 45");
-				result = input.readLine();
-
-				robot.sendCommand("R1.GETPOS");
-				result = input.readLine();
-				parsePosition(result, position);
-
-				robot.sendCommand("L1.SCAN");
-				result = input.readLine();
-				parseMeasures(result, measures);
-				map.drawLaserScan(position, measures);
-
-				robot.sendCommand("P1.MOVEFW 90");
-				result = input.readLine();
-
-				robot.sendCommand("R1.GETPOS");
-				result = input.readLine();
-				parsePosition(result, position);
-
-				robot.sendCommand("L1.SCAN");
-				result = input.readLine();
-				parseMeasures(result, measures);
-				map.drawLaserScan(position, measures);
-
-				robot.sendCommand("P1.ROTATERIGHT 45");
-				result = input.readLine();
-
-				robot.sendCommand("P1.MOVEFW 90");
-				result = input.readLine();
-
-				robot.sendCommand("R1.GETPOS");
-				result = input.readLine();
-				parsePosition(result, position);
-
-				robot.sendCommand("L1.SCAN");
-				result = input.readLine();
-				parseMeasures(result, measures);
-				map.drawLaserScan(position, measures);
-
-				robot.sendCommand("P1.ROTATERIGHT 45");
-				result = input.readLine();
-
-				robot.sendCommand("P1.MOVEFW 100");
-				result = input.readLine();
-
-				robot.sendCommand("R1.GETPOS");
-				result = input.readLine();
-				parsePosition(result, position);
-
-				robot.sendCommand("L1.SCAN");
-				result = input.readLine();
-				parseMeasures(result, measures);
-				map.drawLaserScan(position, measures);
-
-				robot.sendCommand("P1.ROTATERIGHT 90");
-				result = input.readLine();
-
-				robot.sendCommand("P1.MOVEFW 80");
-				result = input.readLine();
-
-				robot.sendCommand("R1.GETPOS");
-				result = input.readLine();
-				parsePosition(result, position);
-
-				robot.sendCommand("L1.SCAN");
-				result = input.readLine();
-				parseMeasures(result, measures);
-				map.drawLaserScan(position, measures);
-
-				robot.sendCommand("P1.MOVEFW 100");
-				result = input.readLine();
-
-				robot.sendCommand("R1.GETPOS");
-				result = input.readLine();
-				parsePosition(result, position);
-
-				robot.sendCommand("L1.SCAN");
-				result = input.readLine();
-				parseMeasures(result, measures);
-				map.drawLaserScan(position, measures);
-				this.running = false;
 			} catch (IOException ioe) {
 				System.err.println("execution stopped");
 				running = false;
@@ -222,6 +128,7 @@ public class MobileRobotAI implements Runnable {
 	}
 
 	private void parseMeasures(String value, double measures[]) {
+        //System.out.println(value);
 		for (int i = 0; i < 360; i++) {
 			measures[i] = 100.0;
 		}
@@ -240,7 +147,7 @@ public class MobileRobotAI implements Runnable {
 				}
 				measures[direction] = distance;
 				// Printing out all the degrees and what it encountered.
-				System.out.println("direction = " + direction + " distance = " + distance);
+				//System.out.println("direction = " + direction + " distance = " + distance);
 			}
 		}
 	}
