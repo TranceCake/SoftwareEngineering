@@ -47,6 +47,7 @@ public class MobileRobotAI implements Runnable {
         boolean secondRun = false;
 		double position[] = new double[3];
 		double measures[] = new double[360];
+        double dist = 0;
 		while (running) {
 			try {
 
@@ -76,14 +77,37 @@ public class MobileRobotAI implements Runnable {
 				parseMeasures(result, measures);
 				map.drawLaserScan(position, measures);
 
-                if(measures[90] > 50 && measures[115] > 40 && measures[65] > 20) {
-                    robot.sendCommand("P1.ROTATERIGHT 90");
-                    //System.out.println("right");
+                for(int i = 21; i < 180; i++) {
+                    dist = measures[i];
+                    if(dist != 100) {
+                        break;
+                    }
+                }
+
+                if(measures[0] >= 70) {
+                    System.out.println("iets");
+                    System.out.println(dist);
+                    System.out.println(Math.pow(dist,2));
+                    System.out.println(Math.pow(35,2));
+
+                    double dfw = ((Math.sqrt(Math.pow(dist,2) - Math.pow(35,2))) + 55);
+                    System.out.println("anders " + dfw);
+                    //result = input.readLine();
+                    robot.sendCommand("P1.MOVEFW" + dfw);
                     result = input.readLine();
-                    robot.sendCommand("P1.MOVEFW 30");
+                    robot.sendCommand("P1.ROTATERIGHT 90");
                     result = input.readLine();
                     continue;
                 }
+
+//                if(measures[90] > 50 && measures[120] > 50 && measures[85] > 50) {
+//                    robot.sendCommand("P1.ROTATERIGHT 90");
+//                    //System.out.println("right");
+//                    result = input.readLine();
+//                    robot.sendCommand("P1.MOVEFW 30");
+//                    result = input.readLine();
+//                    continue;
+//                }
 
                 if(measures[0] <= 15) {
                     robot.sendCommand("P1.ROTATELEFT 90");
@@ -152,7 +176,7 @@ public class MobileRobotAI implements Runnable {
 				}
 				measures[direction] = distance;
 				// Printing out all the degrees and what it encountered.
-				//System.out.println("direction = " + direction + " distance = " + distance);
+				System.out.println("direction = " + direction + " distance = " + distance);
 			}
 		}
 	}
