@@ -76,15 +76,13 @@ public class Laser extends Device {
 		for (int i = 0; i < environment.getObstacles().size(); i++) {
 			// This is really dirty: the laser uses direct access to environment's obstacles
 			Obstacle obstacle = environment.getObstacles().get(i);
-			if (!obstacle.getOpaque()) {
-				double dist = pointToObstacle(obstacle.getPolygon(), centre, front, first);
-				if (minDistance == -1.0 || (dist > 0 && dist < minDistance)) {
-					minDistance = dist;
-					if (minDistance > -1 && first) {
-						return minDistance;
-					}
-				}
-			}
+            double dist = pointToObstacle(obstacle.getPolygon(), centre, front, first);
+            if (minDistance == -1.0 || (dist > 0 && dist < minDistance)) {
+                minDistance = dist;
+                if (minDistance > -1 && first) {
+                    return minDistance;
+                }
+            }
 		}
 		if (minDistance > 0)
 			return minDistance;

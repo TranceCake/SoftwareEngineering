@@ -47,7 +47,10 @@ public class MobileRobotAI implements Runnable {
         boolean secondRun = false;
 		double position[] = new double[3];
 		double measures[] = new double[360];
-        double dist = 0;
+        double dist;
+        double pred;
+        double dfw = 0.0;
+
 		while (running) {
 			try {
 
@@ -68,6 +71,8 @@ public class MobileRobotAI implements Runnable {
 //      ases where a variable value is never used after its assignment, i.e.:
 				//System.out.println("intelligence running");
 
+
+
 				robot.sendCommand("R1.GETPOS");
 				result = input.readLine();
 				parsePosition(result, position);
@@ -77,28 +82,55 @@ public class MobileRobotAI implements Runnable {
 				parseMeasures(result, measures);
 				map.drawLaserScan(position, measures);
 
-                for(int i = 21; i < 180; i++) {
-                    dist = measures[i];
-                    if(dist != 100) {
+                for(int i = 88; i > 19; i--) {
+                    pred = Math.round(measures[90] / Math.cos(Math.toRadians(90 - i)));
+                    System.out.println("measure: " + measures[i] + " Deg: " + i + " pred: " + pred);
+                    if(Math.round(measures[i]) != pred) {
+                        int degrees = i + 1;
+                        dist = Math.round(measures[degrees]);
+                        System.out.println("Dist: " + dist + " Deg: " + degrees + " Prediction: " + pred);
+                        dfw = Math.round((dist / Math.cos(Math.toRadians(degrees - 90))) + 52);
+                        System.out.println("rads: " + Math.round((dist / Math.cos(Math.toRadians(degrees - 90)))));
                         break;
                     }
                 }
 
-                if(measures[0] >= 70) {
-                    System.out.println("iets");
-                    System.out.println(dist);
-                    System.out.println(Math.pow(dist,2));
-                    System.out.println(Math.pow(35,2));
+                if(measures[0] > 12 && !(Double.isNaN(dfw))) {
+                    System.out.println("dfw is NaN: " + Double.isNaN(dfw));
 
-                    double dfw = ((Math.sqrt(Math.pow(dist,2) - Math.pow(35,2))) + 55);
-                    System.out.println("anders " + dfw);
-                    //result = input.readLine();
-                    robot.sendCommand("P1.MOVEFW" + dfw);
+                    System.out.println("dfw: " + dfw);
+                    if(dfw > (measures[0] - 12)) {
+                        dfw = measures[0] - 12;
+                    }
+
+                    System.out.println("forward: " + dfw);
+                    robot.sendCommand("P1.MOVEFW " + dfw);
                     result = input.readLine();
-                    robot.sendCommand("P1.ROTATERIGHT 90");
-                    result = input.readLine();
+
+//                    robot.sendCommand("R1.GETPOS");
+//                    result = input.readLine();
+//                    parsePosition(result, position);
+//
+//                    robot.sendCommand("L1.SCAN");
+//                    result = input.readLine();
+//                    parseMeasures(result, measures);
+//                    map.drawLaserScan(position, measures);
+
+                    if(measures[90] == 100) {
+                    //if(!(measures[20] < 100) && measures[0] == 100) {
+                        robot.sendCommand("P1.ROTATERIGHT 90");
+                        result = input.readLine();
+                    }
                     continue;
                 }
+                System.out.println("is NaN: " + Double.isNaN(dfw));
+//                else {
+//                    double distance = (measures[0] - 15);
+//                    String toMove = "P1.MOVEFW " + Double.toString(distance);
+//                    robot.sendCommand(toMove);
+//                    //System.out.println("tot obj");
+//                    result = input.readLine();
+//                }
 
 //                if(measures[90] > 50 && measures[120] > 50 && measures[85] > 50) {
 //                    robot.sendCommand("P1.ROTATERIGHT 90");
@@ -109,24 +141,24 @@ public class MobileRobotAI implements Runnable {
 //                    continue;
 //                }
 
-                if(measures[0] <= 15) {
+                if(measures[0] <= 12) {
                     robot.sendCommand("P1.ROTATELEFT 90");
                     //System.out.println("left");
                     result = input.readLine();
                     continue;
                 }
 
-                if(measures[0] > 15 && (measures[0] < 100)) {
-                    double distance = (measures[0] - 15);
+//                if(measures[0] > 15 && (measures[0] < 100)) {
+                    double distance = (measures[0] - 12);
                     String toMove = "P1.MOVEFW " + Double.toString(distance);
                     robot.sendCommand(toMove);
                     //System.out.println("tot obj");
                     result = input.readLine();
-                } else {
-                    robot.sendCommand("P1.MOVEFW 40");
-                    //System.out.println("fwd 30");
-                    result = input.readLine();
-                }
+//                } else {
+//                    robot.sendCommand("P1.MOVEFW 40");
+//                    //System.out.println("fwd 30");
+//                    result = input.readLine();
+//                }
 
 			} catch (IOException ioe) {
 				System.err.println("execution stopped");
@@ -176,8 +208,11 @@ public class MobileRobotAI implements Runnable {
 				}
 				measures[direction] = distance;
 				// Printing out all the degrees and what it encountered.
-				System.out.println("direction = " + direction + " distance = " + distance);
+				//System.out.println("direction = " + direction + " distance = " + distance);
 			}
+            for (int i = 0; i < 360; i++) {
+                System.out.println("direction = " + i + " distance = " + measures[i]);
+            }
 		}
 	}
 
